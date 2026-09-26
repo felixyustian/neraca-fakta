@@ -351,6 +351,9 @@ vercel link --project neraca-fakta
 vercel deploy --prod
 ```
 
+GitHub pushes don't deploy (`git.deploymentEnabled: false` in `vercel.json`), because a build
+from the repo can't include the demo data; and the build command refuses to run without it, so
+Vercel keeps the last working deployment live instead of publishing an empty demo.
 `.vercelignore` keeps `.env`, the local cache and dev files out of the upload. Visitors can
 still use their own AI key (⚙ AI). The Telegram bot needs an always-on process, so it isn't part
 of the Vercel deployment; run it with `make telegram` on any machine.

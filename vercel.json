@@ -2,8 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "cd web && npm ci",
-  "buildCommand": "cd web && npm run build",
+  "buildCommand": "test -f fixtures/raw/TLKM_report.json && test -f fixtures/raw/market/news.json || { echo 'Demo data missing (fixtures/raw is git-ignored). Deploy with the Vercel CLI from a machine that has it: vercel deploy --prod'; exit 1; }; cd web && npm run build",
   "outputDirectory": "web/dist",
+  "git": {
+    "deploymentEnabled": false
+  },
   "functions": {
     "api/index.py": {
       "maxDuration": 60,
@@ -11,7 +14,13 @@
     }
   },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index" },
-    { "source": "/webhooks/(.*)", "destination": "/api/index" }
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/webhooks/(.*)",
+      "destination": "/api/index"
+    }
   ]
 }
