@@ -9,7 +9,7 @@ captions, YouTube videos, Instagram screenshots. Many quote numbers ("laba naik 
 the company's reported figures on the Indonesia Stock Exchange (IDX), using the
 [Sectors Financial API](https://docs.sectors.app).
 
-Built for **Sectors Hackathon 2026, Track 1 (AI Agents & Assistant)**. Bilingual: Bahasa Indonesia and English.
+Built for **Sectors Hackathon 2026, Track 1 (AI Agents & Assistants)**. Bilingual: Bahasa Indonesia and English.
 
 **Live demo: [neraca-fakta.vercel.app](https://neraca-fakta.vercel.app)** (offline data for BBCA,
 GOTO and TLKM; uses no API credits).
