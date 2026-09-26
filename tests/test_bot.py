@@ -217,3 +217,14 @@ def test_whatsapp_image_is_downloaded(bot, fixture_dir, monkeypatch):
     wa = whatsapp.WhatsAppAdapter(s, bot, bot.store, transport=httpx.MockTransport(handler))
     wa.handle_message({"from": "62811", "id": "wamid.9", "type": "image", "image": {"id": "MEDIA1", "caption": "cek"}})
     assert got["images"][0].data == b"PNGDATA" and got["images"][0].mime == "image/png"
+
+
+def test_score_rounds_half_up_like_the_web_app():
+    from cekfakta.bot.core import accuracy_score
+    from cekfakta.schema import Claim, ClaimType, Text, Verdict, VerdictLabel as L
+
+    def v(label):
+        return Verdict(claim=Claim(ticker="TLKM", claim_type=ClaimType.PROFIT_GROWTH, source_text="x"),
+                       label=label, reason=Text(id="", en=""))
+    # 2 matches + 1 partial out of 4 checkable = 62.5 -> 63 (web shows 63)
+    assert accuracy_score([v(L.SESUAI), v(L.SESUAI), v(L.SEBAGIAN), v(L.TIDAK_SESUAI), v(L.TIDAK_DAPAT)]) == 63

@@ -104,7 +104,8 @@ def accuracy_score(verdicts: list[Verdict]) -> int | None:
         return None
     pts = sum(1 if v.label == VerdictLabel.SESUAI else 0.5 if v.label == VerdictLabel.SEBAGIAN else 0
               for v in checkable)
-    return round(pts / len(checkable) * 100)
+    # Round half up, like the web app's Math.round (Python's round() would give 62 for 62.5).
+    return int(pts / len(checkable) * 100 + 0.5)
 
 
 def _delta(x: float | None, lang: str) -> str:

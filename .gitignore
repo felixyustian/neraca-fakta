@@ -23,3 +23,7 @@ __pycache__/
 .vercel/
 .vercel
 .env*
+
+# Video build output (large, regenerable with video/make_videos.py)
+video/build/
+video/out/
