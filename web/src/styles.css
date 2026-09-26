@@ -8,7 +8,7 @@
   --surface-2: #f7f8f7;
   --text: #0f1716;
   --text-2: #4b5552;
-  --muted: #7a8581;
+  --muted: #5b6662; /* ≥5:1 on every light surface (was #7a8581, 3.3–3.8:1) */
   --border: #e1e5e3;
   --grid: #e8ebe9;
   --axis: #c3c9c6;
@@ -27,6 +27,9 @@
   --partial: #fab219;
   --bad: #d03b3b;
   --unknown: #898781;
+  /* Darker steps for small badges that carry a white glyph (✓, ?): ≥5:1 for the glyph. */
+  --ok-badge: #0a7a0a;
+  --unknown-badge: #66655f;
   --ok-wash: rgb(12 163 12 / 0.12);
   --partial-wash: rgb(250 178 25 / 0.18);
   --bad-wash: rgb(208 59 59 / 0.11);
@@ -94,11 +97,14 @@
 
 /* ---------- Base ---------- */
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* The page owns its canvas: some browser extensions paint <html> dark, which showed at the
+   edges and on overscroll in light mode. */
+html { scroll-behavior: smooth; background-color: var(--bg) !important; }
 body {
   margin: 0;
   background: var(--bg-glow), var(--bg);
   background-attachment: fixed;
+  min-height: 100vh;
   color: var(--text);
   font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -293,6 +299,8 @@ textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 4px color-mix(in
 .ring-track.s-bad { stroke: var(--bad-wash); } .ring-fill.s-bad { stroke: var(--bad); }
 .ring-track.s-unknown { stroke: var(--unknown-wash); } .ring-fill.s-unknown { stroke: var(--unknown); }
 .dot.st-partial, .st-partial .pill-icon, .hl.st-partial .hl-icon { color: #3b2a00; }
+.st-ok .pill-icon, .dot.st-ok, .hl.st-ok .hl-icon { background: var(--ok-badge); }
+.st-unknown .pill-icon, .dot.st-unknown, .hl.st-unknown .hl-icon { background: var(--unknown-badge); }
 
 /* Original message */
 .message-card { padding: 18px 20px; }
@@ -544,7 +552,7 @@ blockquote { margin: 0; padding: 0 0 0 12px; border-left: 2px solid var(--border
 .delta-pill span { font-size: 9px; }
 .delta-pill.up { color: var(--up); background: var(--ok-wash); }
 .delta-pill.down { color: var(--down); background: var(--bad-wash); }
-.delta-pill.flat { color: var(--muted); background: var(--unknown-wash); }
+.delta-pill.flat { color: var(--text-2); background: var(--unknown-wash); }
 
 .rows { list-style: none; margin: 0; padding: 0; }
 .rows li {
@@ -661,3 +669,5 @@ blockquote { margin: 0; padding: 0 0 0 12px; border-left: 2px solid var(--border
   .sources li { grid-template-columns: minmax(0, 1fr) auto; }
   .plat { grid-column: 1 / -1; justify-self: start; }
 }
+
+.demo-notice { margin: 8px 0 0; padding: 6px 10px; border-radius: 8px; background: var(--partial-wash); color: var(--text-2); display: inline-block; }

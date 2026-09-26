@@ -75,6 +75,7 @@ def health(checker: Checker = Depends(get_checker)) -> dict:
         "status": "ok",
         "version": __version__,
         "data_source": checker.source.name,
+        "demo": s.demo_mode,
         "llm_default": s.default_llm_provider,
         # Chat channels the UI can link to (no secrets, just whether they're set up).
         "bots": {

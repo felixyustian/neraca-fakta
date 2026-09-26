@@ -100,7 +100,11 @@ class Checker:
                 daily = self._daily(ticker)
             return CompanyFacts(ticker=ticker, report=report, quarters=quarters, daily=daily)
         except TickerNotFound:
-            if self.source.name == "fixtures":
+            if self.source.name == "fixtures" and self.settings.demo_mode:
+                have = ", ".join(self.source.available()) if hasattr(self.source, "available") else ""
+                notes.append(Text(id=f"Versi demo hanya memuat data {have}; {ticker} tidak tersedia.",
+                                  en=f"The demo only includes data for {have}; {ticker} isn't available."))
+            elif self.source.name == "fixtures":
                 notes.append(Text(id=f"{ticker} tidak ada di data offline. Set SECTORS_API_KEY untuk data live.",
                                   en=f"{ticker} isn't in the offline data. Set SECTORS_API_KEY for live data."))
             else:

@@ -137,6 +137,11 @@ const STRINGS = {
   viaTelegram: { id: "Telegram", en: "Telegram" },
   viaWhatsApp: { id: "WhatsApp", en: "WhatsApp" },
 
+  demoNotice: {
+    id: "Versi demo: data tersimpan untuk {list}. Tidak memakai kredit API.",
+    en: "Demo version: saved data for {list}. Uses no API credits.",
+  },
+
   // Links & screenshots
   sourcesHint: {
     id: "Bisa juga tempel tautan artikel, blog, YouTube, TikTok, Threads, Instagram, Facebook, atau X, dan lampirkan tangkapan layar.",

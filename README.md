@@ -11,6 +11,9 @@ the company's reported figures on the Indonesia Stock Exchange (IDX), using the
 
 Built for **Sectors Hackathon 2026, Track 1**. Bilingual: Bahasa Indonesia and English.
 
+**Live demo: [neraca-fakta.vercel.app](https://neraca-fakta.vercel.app)** (offline data for BBCA,
+GOTO and TLKM; uses no API credits).
+
 > Information tool only. Not investment advice. Price predictions can't be verified and are not graded.
 
 ---
@@ -28,6 +31,7 @@ Built for **Sectors Hackathon 2026, Track 1**. Bilingual: Bahasa Indonesia and E
 - [Sectors credit budget](#sectors-credit-budget)
 - [Project structure](#project-structure)
 - [Development and testing](#development-and-testing)
+- [Deploying to Vercel](#deploying-to-vercel)
 - [Known limitations](#known-limitations)
 - [Data sources](#data-sources)
 
@@ -300,6 +304,7 @@ src/cekfakta/
   store.py            SQLite cache, ledger, bot state
   schema.py           typed models shared by every step
   bot/                chat bot core, Telegram (long polling), WhatsApp (webhook)
+api/index.py          Vercel serverless entry point (demo mode)
 web/src/
   App.tsx             page layout and state
   components/         summary, verdict cards, company panel, market panels, dialogs
@@ -320,8 +325,35 @@ make build        # production frontend into web/dist
 make test         # pytest + TypeScript type check
 ```
 
+Install dependencies with `make install` (runtime from `requirements.txt`, test tools from
+`requirements-dev.txt`).
+
 The test suite (98 tests) mocks every network call: Sectors, the three LLM providers,
 Telegram, Meta, and the websites behind links. It spends no credits.
+
+---
+
+## Deploying to Vercel
+
+The public demo runs on Vercel: the React app as static files and the FastAPI backend as a
+Python serverless function (`api/index.py`, configured in `vercel.json`).
+
+It runs in **demo mode**: `api/index.py` forces `DATA_SOURCE=fixtures`, so the public URL can
+never spend Sectors credits. The saved data in `fixtures/raw/` is bundled from the deployer's
+machine at deploy time and is never committed. Serverless disks are wiped between runs, which is
+why a live deployment would need a shared store (e.g. Redis) for the cache and credit ledger
+before it could safely use a Sectors key.
+
+```bash
+python scripts/probe.py && python scripts/probe_market.py   # once: record the demo data
+vercel login
+vercel link --project neraca-fakta
+vercel deploy --prod
+```
+
+`.vercelignore` keeps `.env`, the local cache and dev files out of the upload. Visitors can
+still use their own AI key (⚙ AI). The Telegram bot needs an always-on process, so it isn't part
+of the Vercel deployment; run it with `make telegram` on any machine.
 
 ---
 

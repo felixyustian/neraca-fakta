@@ -31,6 +31,8 @@ class Settings:
     allow_user_keys: bool = True
     # Market side panels (indices, movers, news, forex). They keep this many credits in
     # reserve under the cap so they never starve fact-checks.
+    # Public demo deployment (offline data only): clearer notes for visitors.
+    demo_mode: bool = False
     market_panels: bool = True
     market_credit_reserve: int = 100
     # Chat bots. Each chat may run this many fact-checks per hour (they spend credits).
@@ -78,6 +80,7 @@ def load_settings() -> Settings:
         llm_models={p: m for p in ("anthropic", "openai", "gemini")
                     if (m := os.getenv(f"{p.upper()}_MODEL", "").strip())},
         allow_user_keys=os.getenv("ALLOW_USER_KEYS", "true").strip().lower() in ("1", "true", "yes"),
+        demo_mode=os.getenv("DEMO_MODE", "false").strip().lower() in ("1", "true", "yes"),
         market_panels=os.getenv("MARKET_PANELS", "true").strip().lower() in ("1", "true", "yes"),
         market_credit_reserve=int(os.getenv("MARKET_CREDIT_RESERVE", "100")),
         bot_checks_per_hour=int(os.getenv("BOT_CHECKS_PER_HOUR", "20")),

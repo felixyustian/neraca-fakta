@@ -373,6 +373,11 @@ function Page({ lang, setLang, theme, setTheme }: PageProps) {
               <span>{t("shortcut")}</span>
             </div>
             <p className="sources-hint muted small">{t("sourcesHint")}</p>
+            {health?.demo && (
+              <p className="demo-notice small">
+                <span aria-hidden>ⓘ</span> {t("demoNotice", { list: health.offline_tickers?.join(", ") || "—" })}
+              </p>
+            )}
             <Attachments
               files={files}
               onChange={setFiles}

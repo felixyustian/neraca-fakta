@@ -107,6 +107,7 @@ export interface Health {
   status: string;
   version: string;
   data_source: "live" | "fixtures";
+  demo?: boolean;
   llm_default: Extractor;
   allow_user_keys: boolean;
   providers: ProviderInfo[];

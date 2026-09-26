@@ -4,7 +4,7 @@ PY ?= python3
 .PHONY: install dev-api dev-web build serve test offline telegram
 
 install:            ## Python + web dependencies
-	$(PY) -m pip install -r requirements.txt
+	$(PY) -m pip install -r requirements-dev.txt
 	cd web && npm install
 
 dev-api:            ## API with reload on :8000
