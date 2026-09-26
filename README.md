@@ -42,6 +42,7 @@ GOTO and TLKM; uses no API credits).
 - [Videos](#videos)
 - [Known limitations](#known-limitations)
 - [Data sources](#data-sources)
+- [License](#license)
 
 ---
 
@@ -394,3 +395,11 @@ The teaser and judging videos are generated from the running app by `video/make_
 - **[Sectors Financial API](https://sectors.app)**: IDX company data, indices, movers, news, commodities
 - **[Frankfurter](https://frankfurter.dev)**: European Central Bank reference exchange rates
 - Linked articles and posts are read to extract claims; the app shows short quotes and links back to the original.
+
+---
+
+## License
+
+[MIT](LICENSE) © 2026 Felix Yustian Setiono. The license covers this project's code. Data from
+the Sectors Financial API and exchange-rate data remain subject to their providers' terms and are
+not included in the repository.
