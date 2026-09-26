@@ -14,6 +14,13 @@ Built for **Sectors Hackathon 2026, Track 1**. Bilingual: Bahasa Indonesia and E
 **Live demo: [neraca-fakta.vercel.app](https://neraca-fakta.vercel.app)** (offline data for BBCA,
 GOTO and TLKM; uses no API credits).
 
+**Videos** (Bahasa Indonesia narration, English subtitles):
+
+| Teaser (1 min) | Demo & how it works (3 min) |
+|---|---|
+| [![Neraca Fakta teaser](https://img.youtube.com/vi/Ges0zLsleQE/hqdefault.jpg)](https://youtu.be/Ges0zLsleQE) | [![Neraca Fakta demo and how it works](https://img.youtube.com/vi/CqBjhSDLDSA/hqdefault.jpg)](https://youtu.be/CqBjhSDLDSA) |
+| [youtu.be/Ges0zLsleQE](https://youtu.be/Ges0zLsleQE) | [youtu.be/CqBjhSDLDSA](https://youtu.be/CqBjhSDLDSA) |
+
 > Information tool only. Not investment advice. Price predictions can't be verified and are not graded.
 
 ---
@@ -32,6 +39,7 @@ GOTO and TLKM; uses no API credits).
 - [Project structure](#project-structure)
 - [Development and testing](#development-and-testing)
 - [Deploying to Vercel](#deploying-to-vercel)
+- [Videos](#videos)
 - [Known limitations](#known-limitations)
 - [Data sources](#data-sources)
 
@@ -357,6 +365,13 @@ Vercel keeps the last working deployment live instead of publishing an empty dem
 `.vercelignore` keeps `.env`, the local cache and dev files out of the upload. Visitors can
 still use their own AI key (⚙ AI). The Telegram bot needs an always-on process, so it isn't part
 of the Vercel deployment; run it with `make telegram` on any machine.
+
+---
+
+## Videos
+
+The teaser and judging videos are generated from the running app by `video/make_videos.py`
+(narration, recording, subtitles, captions, thumbnails); see `video/README.md`.
 
 ---
 
