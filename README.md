@@ -11,6 +11,9 @@ the company's reported figures on the Indonesia Stock Exchange (IDX), using the
 
 Built for **Sectors Hackathon 2026, Track 1 (AI Agents & Assistants)**. Bilingual: Bahasa Indonesia and English.
 
+**The AI only extracts claims; the verdicts are computed by our code from Sectors data, and the
+app still works with the AI turned off.**
+
 **Live demo: [neraca-fakta.vercel.app](https://neraca-fakta.vercel.app)** (offline data for BBCA,
 GOTO and TLKM; uses no API credits).
 
